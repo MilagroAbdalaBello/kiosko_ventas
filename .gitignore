@@ -1,0 +1,19 @@
+# .gitignore
+
+# -----------------
+# 1. Archivos de base de datos
+# -----------------
+db.sqlite3
+*.sqlite3
+
+# -----------------
+# 2. Archivos sensibles de entorno
+# -----------------
+.env  # <--- IMPORTANTE: Aquí pondremos tu contraseña
+
+# -----------------
+# 3. Archivos de Python y sistema
+# -----------------
+*.pyc
+__pycache__/
+venv/  # Si tu entorno virtual se llama 'venv'

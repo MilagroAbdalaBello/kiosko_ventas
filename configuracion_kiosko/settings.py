@@ -68,6 +68,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'configuracion_kiosko.wsgi.application'
 
+import os
+from dotenv import load_dotenv
+# Carga las variables de entorno
+load_dotenv()
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
@@ -77,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kiosko_db',                       
         'USER': 'root',                            
-        'PASSWORD': 'Mary1992.',         
+        'PASSWORD': os.environ.get('Mary1992.'),         
         'HOST': 'localhost',
         'PORT': '3306',
     }
