@@ -14,9 +14,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# configuracion_kiosko/urls.py
+
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic.base import RedirectView # <-- Importa la herramienta de redirección
+
+# Nota: El nombre 'login' se define automáticamente por 'django.contrib.auth.urls'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    
+    # ----------------------------------------------------------------------
+    # ¡NUEVA LÍNEA! Redirige la URL raíz ("/") directamente a la URL de login.
+    # ----------------------------------------------------------------------
+    path('', RedirectView.as_view(pattern_name='login', permanent=False), name='home'),
+    
+    # El resto de URLs de la app 'ventas' se manejan desde su propio archivo
+    path("", include("ventas.urls")), 
+    path('accounts/', include('django.contrib.auth.urls')), 
 ]

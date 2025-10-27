@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Kiosco de Ventas{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %} 
+</head>
+<body>
+
+    {% if user.is_authenticated %}
+    <nav class="navbar">
+        <div class="brand">
+            <a href="{% url 'dashboard' %}" style="font-size: 1.2em; font-weight: bold;">Kiosco TPV</a>
+        </div>
+        <div>
+            <span>Bienvenido, {{ user.username }}</span>
+            <a href="{% url 'tpv' %}" class="btn-link">Ir al TPV</a>
+            {% if user.is_staff %}<a href="{% url 'admin:index' %}">Admin</a>{% endif %}
+            <a href="{% url 'logout' %}" class="btn-link">Salir</a>
+        </div>
+    </nav>
+    {% endif %}
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro de Empleado{% endblock %}
+
+{% block content %}
+    <h2>Registro para Nuevo Empleado</h2>
+    <p>Crea tu nombre de usuario y contraseña. Serás asignado automáticamente al rol "Empleado".</p>
+
+    <form method="post">
+        {% csrf_token %} 
+        
+        {{ form.as_p }} 
+        
+        <button type="submit">Registrarme</button>
+    </form>
+    
+    <p style="margin-top: 20px;">¿Ya tienes cuenta? <a href="{% url 'login' %}">Iniciar Sesión</a></p>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Terminal Punto de Venta</title>
+    <meta name="csrf-token" content="{{ csrf_token }}"> 
+    <style>
+        body { display: flex; font-family: Arial, sans-serif; margin: 0; }
+        #productos-panel { width: 70%; padding: 20px; border-right: 1px solid #ccc; }
+        #carrito-panel { width: 30%; padding: 20px; background-color: #f4f4f4; }
+        .producto-card { border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="productos-panel">
+        <h2>Inventario</h2>
+        <div id="lista-productos">
+            {% for producto in productos %}
+            <div class="producto-card" data-id="{{ producto.id }}" data-precio="{{ producto.precio }}">
+                <strong>{{ producto.nombre }}</strong>
+                <p>Precio: ${{ producto.precio }} | Stock: {{ producto.stock }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="carrito-panel">
+        <h2>Carrito de Venta</h2>
+        <table id="tabla-carrito" width="100%">
+            <thead><tr><th>Producto</th><th>Cant.</th><th>Subtotal</th></tr></thead>
+            <tbody></tbody>
+        </table>
+        <h3>Total: <span id="total-carrito">$0.00</span></h3>
+        <button id="btn-finalizar-venta">Finalizar Venta (AJAX)</button>
+    </div>
+    <script src="{% static 'js/tpv.js' %}"></script>
+</body>
+</html>

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ventas',
+    'configuracion_kiosko',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +56,7 @@ ROOT_URLCONF = 'configuracion_kiosko.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +72,7 @@ WSGI_APPLICATION = 'configuracion_kiosko.wsgi.application'
 
 import os
 from dotenv import load_dotenv
+
 # Carga las variables de entorno
 load_dotenv()
 
@@ -81,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'kiosko_db',                       
         'USER': 'root',                            
-        'PASSWORD': os.environ.get('Mary1992.'),         
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD'),         
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -124,7 +127,18 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Directorio donde Django buscará archivos estáticos
+STATICFILES_DIRS = [
+    BASE_DIR / "static", # <-- ¡Añade esta línea!
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# URL a la que redirigir después de iniciar sesión (nombre de la URL que crearemos)
+LOGIN_REDIRECT_URL = 'dashboard' 
+
+# URL a la que redirigir si se intenta acceder a una página protegida sin iniciar sesión
+LOGIN_URL = 'login'

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Panel de Control</h1>
+    
+    <p>Tu rol: 
+    {% if es_jefe %}<strong>Jefe</strong>
+    {% elif es_empleado %}<strong>Empleado</strong>
+    {% else %}Usuario sin rol asignado{% endif %}
+    </p>
+
+    <h2>Tareas Rápidas</h2>
+    
+    <p><a href="{% url 'tpv' %}" class="btn-link">Abrir T.P.V. (Punto de Venta)</a></p>
+    <hr>
+    
+    {% if es_jefe %}
+    <h3>Administración y Reportes</h3>
+    <ul>
+        <li><a href="{% url 'admin:index' %}">Gestión de Inventario (Admin)</a></li>
+        <li><a href="#">Reportes de Ventas (Pendiente)</a></li>
+    </ul>
+    {% endif %}
+    
+    <p style="margin-top: 30px;"><a href="{% url 'logout' %}" class="btn-link" style="background-color: #dc3545;">Cerrar Sesión</a></p>
+{% endblock %}

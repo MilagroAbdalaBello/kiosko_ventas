@@ -1,0 +1,70 @@
+/* KIOSKO_VENTAS/static/css/style.css */
+
+/* Reset básico y fuente */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Fondo suave */
+    color: #333;
+}
+
+/* Estilo para contenedores y formularios */
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Estilo de Botones */
+button, .btn-link {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Para usarlo en enlaces como botones */
+    display: inline-block;
+}
+
+button:hover, .btn-link:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo de formulario para login y registro */
+form p {
+    margin-bottom: 15px;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* Estilo para la navegación/dashboard */
+.navbar {
+    background-color: #343a40; /* Barra superior oscura */
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+}
