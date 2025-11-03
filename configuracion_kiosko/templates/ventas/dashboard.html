@@ -1,28 +1,67 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard{% endblock %}
-
 {% block content %}
+<div class="container mt-5">
     <h1>Panel de Control</h1>
-    
-    <p>Tu rol: 
-    {% if es_jefe %}<strong>Jefe</strong>
-    {% elif es_empleado %}<strong>Empleado</strong>
-    {% else %}Usuario sin rol asignado{% endif %}
-    </p>
+    <p>Tu rol: **{{ user.groups.all.0.name }}**</p> 
+    <hr>
 
-    <h2>Tareas Rápidas</h2>
+    {# --- SECCIÓN 1: OPERACIONES DIARIAS --- #}
+    <h2>Operaciones Diarias</h2>
+    <div class="row">
+        
+        {# BOTÓN DE VENTA (TPV) #}
+        <div class="col-md-4 mb-3">
+            <a href="{% url 'tpv' %}" class="btn btn-primary btn-lg w-100 py-3">
+                Abrir T.P.V. (Punto de Venta) 💰
+            </a>
+        </div>
+
+        {# BOTÓN DE CAJA (NUEVO REQUERIMIENTO) #}
+        <div class="col-md-4 mb-3">
+            <a href="{% url 'caja' %}" class="btn btn-warning btn-lg w-100 py-3">
+                Apertura y Cierre de Caja 🚪
+            </a>
+        </div>
+        
+    </div>
     
-    <p><a href="{% url 'tpv' %}" class="btn-link">Abrir T.P.V. (Punto de Venta)</a></p>
     <hr>
     
+    {# --- SECCIÓN 2: ADMINISTRACIÓN Y REPORTES (SOLO JEFE) --- #}
     {% if es_jefe %}
-    <h3>Administración y Reportes</h3>
-    <ul>
-        <li><a href="{% url 'admin:index' %}">Gestión de Inventario (Admin)</a></li>
-        <li><a href="#">Reportes de Ventas (Pendiente)</a></li>
-    </ul>
+    <h2>Administración y Reportes</h2>
+    <div class="row">
+        
+        {# BOTÓN GESTIÓN DE INVENTARIO (ADMIN) #}
+        <div class="col-md-4 mb-3">
+            <a href="{% url 'admin:index' %}" class="btn btn-info btn-lg w-100 py-3" target="_blank">
+                Gestión de Inventario (Admin) 📦
+            </a>
+        </div>
+
+        {# BOTÓN REGISTRO DE VENTAS (REPORTES) #}
+        <div class="col-md-4 mb-3">
+            <a href="{% url 'reportes' %}" class="btn btn-success btn-lg w-100 py-3">
+                Registros de Ventas 📈
+            </a>
+        </div>
+        {# BOTÓN REGISTRO DE EMPLEADOS (PARA USO INTERNO DEL JEFE) #}
+    <div class="col-md-4 mb-3">
+        <a href="{% url 'registro_empleado' %}" class="btn btn-secondary btn-lg w-100 py-3">
+            **Registrar Empleado** 🧑‍💼
+        </a>
+    </div>
+        
+
+    </div>
     {% endif %}
-    
-    <p style="margin-top: 30px;"><a href="{% url 'logout' %}" class="btn-link" style="background-color: #dc3545;">Cerrar Sesión</a></p>
-{% endblock %}
+
+    <hr>
+
+    <div class="mt-4">
+        <a href="{% url 'logout' %}" class="btn btn-danger">Cerrar Sesión</a>
+    </div>
+
+</div>
+{% endblock content %}

@@ -33,4 +33,5 @@ urlpatterns = [
     # El resto de URLs de la app 'ventas' se manejan desde su propio archivo
     path("", include("ventas.urls")), 
     path('accounts/', include('django.contrib.auth.urls')), 
+    
 ]

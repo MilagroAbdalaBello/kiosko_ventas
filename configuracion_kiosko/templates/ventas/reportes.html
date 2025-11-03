@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Registros de Ventas{% endblock %}
+
+{% block content %}
+    <h1>Registro de Ventas</h1>
+    <p>Aquí se detallan todas las ventas realizadas en el TPV.</p>
+    <hr>
+
+    {% if ventas %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID Venta</th>
+                <th>Fecha/Hora</th>
+                <th>Empleado</th>
+                <th>Total</th>
+                <th>Detalles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in ventas %}
+            <tr>
+                <td>{{ venta.id }}</td>
+                <td>{{ venta.fecha|date:"d M Y H:i" }}</td>
+                <td>{{ venta.empleado.username }}</td>
+                <td>${{ venta.total|floatformat:2 }}</td>
+                <td>
+                    <button class="btn btn-sm btn-info" onclick="alert('Funcionalidad para ver el detalle de la Venta ID: {{ venta.id }} (Pendiente)')">Ver Detalle</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-warning">
+        No se han registrado ventas en el sistema.
+    </div>
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Volver al Dashboard</a>
+    </div>
+
+{% endblock %}

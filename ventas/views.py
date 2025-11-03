@@ -144,3 +144,29 @@ def registro_empleado(request):
         
     contexto = {'form': form}
     return render(request, 'ventas/registro_empleado.html', contexto)
+
+# VISTA NUEVA: REGISTROS DE VENTA (Reportes)
+@login_required
+def reportes(request):
+    """Muestra el registro de todas las ventas para el Jefe."""
+    
+    # 1. Verificar Rol (Medida de Seguridad Adicional)
+    if not request.user.groups.filter(name='Jefe').exists():
+        # Redirigir o mostrar un mensaje de error si no es Jefe
+        return render(request, 'ventas/dashboard.html', {'error': 'Acceso Denegado'})
+
+    # 2. Obtener todas las ventas
+    # Seleccionamos las ventas y precargamos el usuario que hizo la venta para evitar consultas lentas.
+    ventas = Venta.objects.select_related('empleado').order_by('-fecha') 
+    
+    contexto = {
+        'titulo': 'Registro de Ventas',
+        'ventas': ventas,
+    }
+    return render(request, 'ventas/reportes.html', contexto)
+
+# VISTA NUEVA: APERTURA Y CIERRE DE CAJA
+@login_required
+def caja(request):
+    # Aquí irá la lógica de manejo de caja
+    return render(request, 'ventas/caja.html', {'titulo': 'Apertura y Cierre de Caja'})
